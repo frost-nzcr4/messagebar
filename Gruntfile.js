@@ -49,12 +49,20 @@ module.exports = function(grunt) {
 
     // CSS minification
     cssmin: {
+      dist: {
+        files: {
+          'dist/jquery.messagebar.min.css': ['src/messagebar.css']
+        }
+      }
+    },
+    
+    usebanner: {
       add_banner: {
         options: {
           banner: '/* messagebar by audreyr ~ https://github.com/audreyr/messagebar */'
         },
         files: {
-          'dist/jquery.messagebar.min.css': ['src/messagebar.css']
+          src: ['dist/jquery.messagebar.min.css']
         }
       }
     },
@@ -77,8 +85,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-cssmin");
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-banner');
 
-  grunt.registerTask("default", ["jshint", "concat", "uglify", "cssmin", "connect"]);
+  grunt.registerTask("default", ["jshint", "concat", "uglify", "cssmin", "usebanner", "connect"]);
   grunt.registerTask("travis", ["jshint"]);
 
 };
